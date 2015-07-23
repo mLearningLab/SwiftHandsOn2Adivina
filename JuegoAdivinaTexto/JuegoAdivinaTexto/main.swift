@@ -12,27 +12,23 @@
 
 import Foundation
 
-let intentos = 12
-let oculto = randomNum()
-loop:
-    for var i=1; i<=intentos; i++ {
-        let num = inputNum("\(i). Anota número")
-        switch num {
-        case nil:
-            i--
-            println("Escribiste un valor inválido, intenta de nuevo")
-        case _ where num==oculto:
-            println("Ganaste!")
-            break loop
-        case _ where num<oculto:
-            println("Anota num MAYOR")
-        case _ where num>oculto:
-            println("Anota num menor")
-        default:
-            i--
-            println("Escribiste un valor inválido, intenta de nuevo")
-        }
-        if i==intentos {
-            println("Bye! el número era \(oculto)")
-        }
+var final = false
+var oculto = randomNum()
+var num: Int!
+do {
+    num = inputNum("Anota número")
+    if num==nil {
+        println("Escribiste un valor inválido, intenta de nuevo")
+    } else if num==oculto {
+        final = true
+    } else if num<oculto {
+        println("Anota num MAYOR")
+    } else {
+        println("Anota num menor")
+    }
+} while !final
+if final {
+    println("Ganaste!")
+} else {
+    println("Bye! el número era \(oculto)")
 }
